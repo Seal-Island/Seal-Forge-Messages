@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "sealinit",
+    "name": "Seal Init",
+    "description": "Permite a alteração da mensagens do Forge como 'Server is still starting'.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Focamacho"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
