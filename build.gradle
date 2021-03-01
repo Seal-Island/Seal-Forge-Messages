@@ -4,7 +4,7 @@ buildscript {
         jcenter()
         mavenCentral()
         maven {
-            url = 'http://repo.spongepowered.org/maven'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
         }
     }
     dependencies {
@@ -22,7 +22,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 group = 'com.focamacho'
 version = '1.0'
-archivesBaseName = 'Seal Messages'
+archivesBaseName = 'SealForgeMessages'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
@@ -67,25 +67,22 @@ configurations {
 
 sourceSets {
     main {
-        ext.refMap = "mixins.sealmessages.refmap.json"
+        ext.refMap = "mixins.sealforgemessages.refmap.json"
     }
 }
 
 repositories {
     mavenCentral()
-    maven {
-        name = 'sponge'
-        url = 'https://repo.spongepowered.org/maven'
-    }
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven { url = 'https://repo.focamacho.com/repository/releases/' }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
-    compile 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
-
-    embed group: 'org.json', name: 'json', version: '20200518'
-    embed group: 'commons-io', name: 'commons-io', version: '2.7'
+    embed('org.spongepowered:mixin:0.8-SNAPSHOT'){ transitive = false }
+    embed 'com.focamacho:sealconfig:1.2'
 }
+
 
 jar {
     from(configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }) {
@@ -94,8 +91,10 @@ jar {
 
     manifest.attributes(
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-            'MixinConfigs': 'mixins.sealmessages.json',
+            'MixinConfigs': 'mixins.sealforgemessages.json',
             'FMLCorePluginContainsFMLMod': 'true',
+            'ForceLoadAsMod': true,
+            'FMLCorePlugin': 'com.focamacho.sealforgemessages.core.SealForgeMessagesCore'
     )
 }
 
